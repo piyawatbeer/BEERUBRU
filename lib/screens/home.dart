@@ -9,6 +9,14 @@ class _HomeState extends State<Home> {
   // Expliclt
 
   // Method
+  Widget showLogo() {
+    return Container(alignment: Alignment.center, child: Container(
+      width: 200.0,
+      height: 550.0,
+      child: Image.asset('images/logo.png'),
+    ),);
+  }
+
   Widget showAppName() {
     return Text('BEER UBRU');
   }
@@ -19,7 +27,7 @@ class _HomeState extends State<Home> {
         body: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
-          showAppName(),
+          showLogo(),
           showAppName(),
         ]));
   }
