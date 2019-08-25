@@ -1,3 +1,4 @@
+import 'package:beer_ubru/screens/register.dart';
 import 'package:flutter/material.dart';
 
 class Home extends StatefulWidget {
@@ -37,7 +38,12 @@ class _HomeState extends State<Home> {
           'Sign Up',
           style: TextStyle(color: Colors.blue.shade700),
         ),
-        onPressed: () {},
+        onPressed: () {
+          print('You Click SignUp');
+
+          MaterialPageRoute materialPageRoute = MaterialPageRoute(builder: (BuildContext context)=>Register());
+          Navigator.of(context).push(materialPageRoute);
+        },
       ),
     );
   }
@@ -68,7 +74,20 @@ class _HomeState extends State<Home> {
 
   Widget showAppName() {
     return Text(
-      'BEER UBRU งงเลย',
+      'BEER UBRU',
+      style: TextStyle(
+        fontSize: 35.0,
+        fontWeight: FontWeight.bold,
+        fontStyle: FontStyle.italic,
+        color: Colors.red[200],
+        fontFamily: 'Kanit',
+      ),
+    );
+  }
+
+  Widget showAppPhone() {
+    return Text(
+      'Tel: 0874487882',
       style: TextStyle(
         fontSize: 35.0,
         fontWeight: FontWeight.bold,
@@ -85,7 +104,8 @@ class _HomeState extends State<Home> {
         body: Container(
       decoration: BoxDecoration(
           gradient: RadialGradient(
-        colors: [Colors.white, Colors.red],radius: 1.5,
+        colors: [Colors.white, Colors.red],
+        radius: 1.5,
         center: Alignment.center,
       )),
       child: Column(
@@ -94,6 +114,8 @@ class _HomeState extends State<Home> {
             showLogo(),
             mySizebox(),
             showAppName(),
+            mySizebox(),
+            showAppPhone(),
             mySizebox(),
             showButton(),
           ]),
