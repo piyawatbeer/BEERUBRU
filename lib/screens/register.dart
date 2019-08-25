@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
 class Register extends StatefulWidget {
   @override
@@ -12,6 +13,7 @@ class _RegisterState extends State<Register> {
   Color passwordColor = Colors.pink.shade400;
   final formKey = GlobalKey<FormState>();
   String nameString, emailString, passwordString;
+  FirebaseAuth firebaseAuth = FirebaseAuth.instance;
 
   //method
 
@@ -103,10 +105,23 @@ class _RegisterState extends State<Register> {
       onPressed: () {
         if (formKey.currentState.validate()) {
           formKey.currentState.save();
-          print('name = $nameString, email = $emailString, password = $passwordString ');
+          print(
+              'name = $nameString, email = $emailString, password = $passwordString ');
+          registerThread();
         }
       },
     );
+  }
+
+  Future<void> registerThread() async {
+    await firebaseAuth
+        .createUserWithEmailAndPassword(
+            email: emailString, password: passwordString)
+        .then((response) {
+      print('success register');
+    }).catchError((response) {
+      print('response = ${response.toString()}');
+    });
   }
 
   @override

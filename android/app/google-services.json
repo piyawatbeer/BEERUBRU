@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "311931086778",
+    "firebase_url": "https://eternal-reserve-247406.firebaseio.com",
+    "project_id": "eternal-reserve-247406",
+    "storage_bucket": "eternal-reserve-247406.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:311931086778:android:41521b1dd58318f9",
+        "android_client_info": {
+          "package_name": "com.powerdepinnovative.beer_ubru"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "311931086778-208j1ip5pmedjm97s2ba4l2ojh22enbo.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCtowgIisWQCL2Cdw0ouvz86j2haC7CWh8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "311931086778-208j1ip5pmedjm97s2ba4l2ojh22enbo.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
