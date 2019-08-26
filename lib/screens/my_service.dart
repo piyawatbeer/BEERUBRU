@@ -1,4 +1,6 @@
 import 'package:beer_ubru/screens/home.dart';
+import 'package:beer_ubru/screens/list_product.dart';
+import 'package:beer_ubru/screens/show_map.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
@@ -11,6 +13,9 @@ class _MyServiceState extends State<MyService> {
   // Explicit
   String loginString = '';
   FirebaseAuth firebaseAuth = FirebaseAuth.instance;
+  double mySizeIcon = 36.0;
+  double h2 = 18.0;
+  Widget myWidget = ListProduct();
 
   // Method
 
@@ -20,25 +25,72 @@ class _MyServiceState extends State<MyService> {
     findDisplayName();
   }
 
+  Widget listProductMenu() {
+    return ListTile(
+      leading: Icon(
+        Icons.home,
+        size: mySizeIcon,
+      ),
+      title: Text(
+        'List Product',
+        style: TextStyle(fontSize: h2),
+      ),
+      subtitle: Text('Show List All Product'),
+      onTap: () {
+        setState(() {
+          myWidget = ListProduct();
+          Navigator.of(context).pop();
+        });
+      },
+    );
+  }
+
+  Widget mapMenu() {
+    return ListTile(
+      leading: Icon(
+        Icons.map,
+        size: mySizeIcon,
+      ),
+      title: Text(
+        'Show Map',
+        style: TextStyle(fontSize: h2),
+      ),
+      subtitle: Text('Show List All Product'),
+          onTap: () {
+        setState(() {
+          myWidget = ShowMap();
+          Navigator.of(context).pop();
+        });
+      },
+    );
+  }
+
   Widget signOutMenu() {
     return ListTile(
-      leading: Icon(Icons.android,color: Colors.red,),
+      leading: Icon(
+        Icons.cached,
+        size: mySizeIcon,
+        color: Colors.red,
+      ),
       title: Text(
         'Signout',
-        style: TextStyle(color: Colors.red),
+        style: TextStyle(
+          color: Colors.red,
+          fontSize: 22.0,
+        ),
       ),
       onTap: () {
         processSignOut();
       },
-
     );
   }
 
-Future<void> processSignOut() async {
+  Future<void> processSignOut() async {
     await firebaseAuth.signOut().then((response) {
       MaterialPageRoute materialPageRoute =
-        MaterialPageRoute(builder: (BuildContext) => Home());
-        Navigator.of(context).pushAndRemoveUntil(materialPageRoute, (Route<dynamic>route)=>false);
+          MaterialPageRoute(builder: (BuildContext) => Home());
+      Navigator.of(context).pushAndRemoveUntil(
+          materialPageRoute, (Route<dynamic> route) => false);
     });
   }
 
@@ -97,6 +149,8 @@ Future<void> processSignOut() async {
       child: ListView(
         children: <Widget>[
           myHeadDrawer(),
+          listProductMenu(),
+          mapMenu(),
           signOutMenu(),
         ],
       ),
@@ -109,7 +163,7 @@ Future<void> processSignOut() async {
       appBar: AppBar(
         title: Text('My Service'),
       ),
-      body: Text('body'),
+      body: myWidget,
       drawer: myDrewerMenu(),
     );
   }
