@@ -1,3 +1,4 @@
+import 'package:beer_ubru/screens/home.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
@@ -12,10 +13,33 @@ class _MyServiceState extends State<MyService> {
   FirebaseAuth firebaseAuth = FirebaseAuth.instance;
 
   // Method
+
   @override
   void initState() {
     super.initState();
     findDisplayName();
+  }
+
+  Widget signOutMenu() {
+    return ListTile(
+      leading: Icon(Icons.android,color: Colors.red,),
+      title: Text(
+        'Signout',
+        style: TextStyle(color: Colors.red),
+      ),
+      onTap: () {
+        processSignOut();
+      },
+
+    );
+  }
+
+Future<void> processSignOut() async {
+    await firebaseAuth.signOut().then((response) {
+      MaterialPageRoute materialPageRoute =
+        MaterialPageRoute(builder: (BuildContext) => Home());
+        Navigator.of(context).pushAndRemoveUntil(materialPageRoute, (Route<dynamic>route)=>false);
+    });
   }
 
   Future<void> findDisplayName() async {
@@ -35,11 +59,11 @@ class _MyServiceState extends State<MyService> {
 
   Widget showAppName() {
     return Text(
-      'Ung UBRU',
+      'Beer UBRU',
       style: TextStyle(
         fontSize: 24.0,
         color: Colors.blue,
-        fontFamily: 'DancingScript',
+        fontFamily: 'Kanit',
       ),
     );
   }
@@ -56,8 +80,7 @@ class _MyServiceState extends State<MyService> {
     return DrawerHeader(
       decoration: BoxDecoration(
         image: DecorationImage(
-          image: AssetImage('images/logo2.png'),fit: BoxFit.fill
-        ),
+            image: AssetImage('images/logo2.png'), fit: BoxFit.fill),
       ),
       child: Column(
         children: <Widget>[
@@ -74,6 +97,7 @@ class _MyServiceState extends State<MyService> {
       child: ListView(
         children: <Widget>[
           myHeadDrawer(),
+          signOutMenu(),
         ],
       ),
     );
